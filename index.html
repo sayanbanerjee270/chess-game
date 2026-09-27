@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Grandmaster Chess</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-mark">♞</div>
+
+                <div>
+                    <h1>Grandmaster</h1>
+                    <span>CHESS</span>
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-btn"
+                    id="flipBtn"
+                    title="Flip board">
+                    ⇅
+                </button>
+
+                <button
+                    class="icon-btn"
+                    id="themeBtn"
+                    title="Change board theme">
+                    ◐
+                </button>
+
+                <button
+                    class="new-game-top"
+                    id="newGameBtn">
+                    New Game
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main-layout">
+
+
+            <!-- ================= LEFT PANEL ================= -->
+
+            <aside class="left-panel">
+
+                <div class="panel-card">
+
+                    <div class="panel-title">
+                        <span>GAME MODE</span>
+                    </div>
+
+                    <div class="mode-buttons">
+
+                        <button
+                            class="mode-button active"
+                            data-mode="human">
+                            <strong>♟</strong>
+                            <span>Two Players</span>
+                        </button>
+
+                        <button
+                            class="mode-button"
+                            data-mode="ai">
+                            <strong>♞</strong>
+                            <span>Vs Computer</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-card">
+
+                    <div class="panel-title">
+
+                        <span>GAME</span>
+
+                        <span
+                            class="game-number"
+                            id="gameNumber">
+                            #001
+                        </span>
+
+                    </div>
+
+                    <div class="game-info">
+
+                        <div>
+                            <span>MOVE</span>
+                            <strong id="moveNumber">1</strong>
+                        </div>
+
+                        <div>
+                            <span>TURN</span>
+                            <strong id="turnInfo">White</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-card captured-panel">
+
+                    <div class="panel-title">
+                        <span>CAPTURED</span>
+                    </div>
+
+                    <div class="captured-row">
+
+                        <div>
+                            <span class="captured-label">
+                                White
+                            </span>
+
+                            <div
+                                class="captured-pieces"
+                                id="capturedWhite">
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="captured-label">
+                                Black
+                            </span>
+
+                            <div
+                                class="captured-pieces"
+                                id="capturedBlack">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-card">
+
+                    <div class="panel-title">
+                        <span>CONTROLS</span>
+                    </div>
+
+                    <div class="control-grid">
+
+                        <button id="undoBtn">
+                            ↶ Undo
+                        </button>
+
+                        <button id="resignBtn">
+                            ⚑ Resign
+                        </button>
+
+                        <button id="drawBtn">
+                            ½ Draw
+                        </button>
+
+                        <button id="resetBtn">
+                            ↻ Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- ================= CENTER BOARD ================= -->
+
+            <section class="board-section">
+
+                <!-- Black player -->
+
+                <div class="player-bar">
+
+                    <div class="player-details">
+
+                        <div class="player-avatar black-avatar">
+                            ♚
+                        </div>
+
+                        <div>
+                            <strong id="blackName">
+                                Black
+                            </strong>
+
+                            <span>
+                                Player
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="clock black-clock"
+                        id="blackClock">
+                        10:00
+                    </div>
+
+                </div>
+
+
+                <!-- Chess board -->
+
+                <div
+                    class="board-wrapper"
+                    id="boardWrapper">
+
+                    <div
+                        class="rank-labels"
+                        id="rankLabels">
+                    </div>
+
+                    <div
+                        class="chess-board"
+                        id="chessBoard">
+                    </div>
+
+                    <div
+                        class="file-labels"
+                        id="fileLabels">
+                    </div>
+
+                </div>
+
+
+                <!-- White player -->
+
+                <div class="player-bar">
+
+                    <div class="player-details">
+
+                        <div class="player-avatar white-avatar">
+                            ♔
+                        </div>
+
+                        <div>
+                            <strong id="whiteName">
+                                White
+                            </strong>
+
+                            <span>
+                                Player
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="clock active-clock"
+                        id="whiteClock">
+                        10:00
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="status-bar"
+                    id="statusBar">
+
+                    <span class="status-dot"></span>
+
+                    <span id="statusText">
+                        White to move
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RIGHT PANEL ================= -->
+
+            <aside class="right-panel">
+
+                <div class="moves-card">
+
+                    <div class="moves-header">
+
+                        <div>
+
+                            <span>GAME RECORD</span>
+
+                            <h2>Move History</h2>
+
+                        </div>
+
+                        <span
+                            class="move-count"
+                            id="moveCount">
+                            0 moves
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="moves-list"
+                        id="movesList">
+
+                        <div class="empty-moves">
+                            <span>♟</span>
+
+                            <p>
+                                Make your first move
+                            </p>
+
+                            <small>
+                                White to move
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <span class="tip-icon">♜</span>
+
+                    <div>
+
+                        <strong>Chess tip</strong>
+
+                        <p id="chessTip">
+                            Control the center early
+                            and develop your pieces.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================= PROMOTION MODAL ================= -->
+
+    <div
+        class="modal-overlay"
+        id="promotionModal">
+
+        <div class="promotion-modal">
+
+            <span class="modal-label">
+                PAWN PROMOTION
+            </span>
+
+            <h2>Choose a piece</h2>
+
+            <div class="promotion-options">
+
+                <button data-piece="Q">♛</button>
+                <button data-piece="R">♜</button>
+                <button data-piece="B">♝</button>
+                <button data-piece="N">♞</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GAME OVER MODAL ================= -->
+
+    <div
+        class="modal-overlay"
+        id="gameOverModal">
+
+        <div class="game-over-modal">
+
+            <div
+                class="game-over-icon"
+                id="gameOverIcon">
+                ♔
+            </div>
+
+            <span class="modal-label">
+                GAME COMPLETE
+            </span>
+
+            <h2 id="gameOverTitle">
+                Checkmate
+            </h2>
+
+            <p id="gameOverText">
+                White wins the game.
+            </p>
+
+            <button
+                class="modal-new-game"
+                id="modalNewGame">
+                New Game
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
